@@ -1,16 +1,22 @@
-"use client"
+"use client";
 
-import type React from "react"
+import type React from "react";
 
-import { useState } from "react"
-import Link from "next/link"
-import { Mail, Phone, MapPin, Clock, Send } from "lucide-react"
+import { useState } from "react";
+import Link from "next/link";
+import { Mail, Phone, MapPin, Clock, Send } from "lucide-react";
 
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import Newsletter from "@/components/newsletter"
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import Newsletter from "@/components/newsletter";
 
 export default function ContactPage() {
   const [formState, setFormState] = useState({
@@ -18,31 +24,33 @@ export default function ContactPage() {
     email: "",
     subject: "",
     message: "",
-  })
+  });
 
-  const [submitted, setSubmitted] = useState(false)
+  const [submitted, setSubmitted] = useState(false);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target
-    setFormState((prev) => ({ ...prev, [name]: value }))
-  }
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target;
+    setFormState((prev) => ({ ...prev, [name]: value }));
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
+    e.preventDefault();
     // Here you would typically send the form data to your backend
-    console.log(formState)
-    setSubmitted(true)
+    console.log(formState);
+    setSubmitted(true);
     setFormState({
       name: "",
       email: "",
       subject: "",
       message: "",
-    })
-  }
+    });
+  };
 
   return (
     <div className="flex flex-col min-h-screen">
-      <header className="border-b">
+      {/* <header className="border-b">
         <div className="container flex h-16 items-center justify-between">
           <div className="flex items-center gap-6">
             <Link href="/" className="text-xl font-semibold tracking-tight">
@@ -69,15 +77,18 @@ export default function ContactPage() {
             </Link>
           </div>
         </div>
-      </header>
+      </header> */}
       <main className="flex-1">
         <section className="py-12 md:py-16">
           <div className="container">
             <div className="flex flex-col items-center text-center mb-12">
-              <h1 className="text-3xl md:text-4xl font-light tracking-tight mb-4">Contact Us</h1>
+              <h1 className="text-3xl md:text-4xl font-light tracking-tight mb-4">
+                Contact Us
+              </h1>
               <div className="w-20 h-px bg-neutral-300 mb-4" />
               <p className="text-neutral-600 max-w-2xl">
-                We'd love to hear from you. Reach out with any questions, feedback, or inquiries.
+                We'd love to hear from you. Reach out with any questions,
+                feedback, or inquiries.
               </p>
             </div>
 
@@ -180,24 +191,41 @@ export default function ContactPage() {
                       <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-green-100 text-green-600 mb-4">
                         <Send className="h-8 w-8" />
                       </div>
-                      <h3 className="text-xl font-medium mb-2">Message Sent!</h3>
+                      <h3 className="text-xl font-medium mb-2">
+                        Message Sent!
+                      </h3>
                       <p className="text-neutral-600 mb-6">
-                        Thank you for reaching out. We'll get back to you as soon as possible.
+                        Thank you for reaching out. We'll get back to you as
+                        soon as possible.
                       </p>
-                      <Button onClick={() => setSubmitted(false)}>Send Another Message</Button>
+                      <Button onClick={() => setSubmitted(false)}>
+                        Send Another Message
+                      </Button>
                     </div>
                   ) : (
                     <form onSubmit={handleSubmit} className="space-y-6">
                       <div className="grid grid-cols-1 gap-6">
                         <div>
-                          <label htmlFor="name" className="block text-sm font-medium mb-2">
+                          <label
+                            htmlFor="name"
+                            className="block text-sm font-medium mb-2"
+                          >
                             Your Name
                           </label>
-                          <Input id="name" name="name" value={formState.name} onChange={handleChange} required />
+                          <Input
+                            id="name"
+                            name="name"
+                            value={formState.name}
+                            onChange={handleChange}
+                            required
+                          />
                         </div>
 
                         <div>
-                          <label htmlFor="email" className="block text-sm font-medium mb-2">
+                          <label
+                            htmlFor="email"
+                            className="block text-sm font-medium mb-2"
+                          >
                             Email Address
                           </label>
                           <Input
@@ -211,7 +239,10 @@ export default function ContactPage() {
                         </div>
 
                         <div>
-                          <label htmlFor="subject" className="block text-sm font-medium mb-2">
+                          <label
+                            htmlFor="subject"
+                            className="block text-sm font-medium mb-2"
+                          >
                             Subject
                           </label>
                           <Select>
@@ -219,17 +250,28 @@ export default function ContactPage() {
                               <SelectValue placeholder="Select a subject" />
                             </SelectTrigger>
                             <SelectContent>
-                              <SelectItem value="general">General Inquiry</SelectItem>
-                              <SelectItem value="product">Product Question</SelectItem>
-                              <SelectItem value="order">Order Status</SelectItem>
-                              <SelectItem value="wholesale">Wholesale Inquiry</SelectItem>
+                              <SelectItem value="general">
+                                General Inquiry
+                              </SelectItem>
+                              <SelectItem value="product">
+                                Product Question
+                              </SelectItem>
+                              <SelectItem value="order">
+                                Order Status
+                              </SelectItem>
+                              <SelectItem value="wholesale">
+                                Wholesale Inquiry
+                              </SelectItem>
                               <SelectItem value="other">Other</SelectItem>
                             </SelectContent>
                           </Select>
                         </div>
 
                         <div>
-                          <label htmlFor="message" className="block text-sm font-medium mb-2">
+                          <label
+                            htmlFor="message"
+                            className="block text-sm font-medium mb-2"
+                          >
                             Message
                           </label>
                           <Textarea
@@ -257,55 +299,76 @@ export default function ContactPage() {
         <section className="py-16 bg-neutral-50">
           <div className="container">
             <div className="text-center mb-12">
-              <h2 className="text-2xl md:text-3xl font-light tracking-tight mb-4">Frequently Asked Questions</h2>
+              <h2 className="text-2xl md:text-3xl font-light tracking-tight mb-4">
+                Frequently Asked Questions
+              </h2>
               <div className="w-20 h-px bg-neutral-300 mx-auto mb-4" />
-              <p className="text-neutral-600 max-w-2xl mx-auto">Find answers to our most commonly asked questions</p>
+              <p className="text-neutral-600 max-w-2xl mx-auto">
+                Find answers to our most commonly asked questions
+              </p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
               <div>
-                <h3 className="text-lg font-medium mb-2">Do you offer international shipping?</h3>
+                <h3 className="text-lg font-medium mb-2">
+                  Do you offer international shipping?
+                </h3>
                 <p className="text-neutral-600">
-                  Yes, we ship to most countries worldwide. Shipping rates and delivery times vary by location.
+                  Yes, we ship to most countries worldwide. Shipping rates and
+                  delivery times vary by location.
                 </p>
               </div>
 
               <div>
-                <h3 className="text-lg font-medium mb-2">What is your return policy?</h3>
+                <h3 className="text-lg font-medium mb-2">
+                  What is your return policy?
+                </h3>
                 <p className="text-neutral-600">
-                  We accept returns within 30 days of purchase. Products must be unused and in original packaging.
+                  We accept returns within 30 days of purchase. Products must be
+                  unused and in original packaging.
                 </p>
               </div>
 
               <div>
-                <h3 className="text-lg font-medium mb-2">Are your products cruelty-free?</h3>
+                <h3 className="text-lg font-medium mb-2">
+                  Are your products cruelty-free?
+                </h3>
                 <p className="text-neutral-600">
-                  Yes, all our products are cruelty-free. We do not test on animals and work only with suppliers who
-                  share this commitment.
+                  Yes, all our products are cruelty-free. We do not test on
+                  animals and work only with suppliers who share this
+                  commitment.
                 </p>
               </div>
 
               <div>
-                <h3 className="text-lg font-medium mb-2">Do you offer samples?</h3>
+                <h3 className="text-lg font-medium mb-2">
+                  Do you offer samples?
+                </h3>
                 <p className="text-neutral-600">
-                  Yes, we offer sample sets of our collections, allowing you to experience our fragrances before
-                  committing to a full-size bottle.
+                  Yes, we offer sample sets of our collections, allowing you to
+                  experience our fragrances before committing to a full-size
+                  bottle.
                 </p>
               </div>
 
               <div>
-                <h3 className="text-lg font-medium mb-2">How long do your fragrances last?</h3>
+                <h3 className="text-lg font-medium mb-2">
+                  How long do your fragrances last?
+                </h3>
                 <p className="text-neutral-600">
-                  Our perfumes typically last 6-8 hours, while our body sprays last 3-4 hours. Longevity can vary based
-                  on skin type and environmental factors.
+                  Our perfumes typically last 6-8 hours, while our body sprays
+                  last 3-4 hours. Longevity can vary based on skin type and
+                  environmental factors.
                 </p>
               </div>
 
               <div>
-                <h3 className="text-lg font-medium mb-2">Do you have a loyalty program?</h3>
+                <h3 className="text-lg font-medium mb-2">
+                  Do you have a loyalty program?
+                </h3>
                 <p className="text-neutral-600">
-                  Yes, our ESSENCE Rewards program offers points on purchases, exclusive offers, and early access to new
-                  collections.
+                  Yes, our ESSENCE Rewards program offers points on purchases,
+                  exclusive offers, and early access to new collections.
                 </p>
               </div>
             </div>
@@ -320,7 +383,8 @@ export default function ContactPage() {
             <div>
               <h3 className="text-lg font-medium mb-4">ESSENCE</h3>
               <p className="text-neutral-400 text-sm">
-                Luxury fragrances for the discerning individual. Crafted with passion and precision.
+                Luxury fragrances for the discerning individual. Crafted with
+                passion and precision.
               </p>
             </div>
             <div>
@@ -389,6 +453,5 @@ export default function ContactPage() {
         </div>
       </footer>
     </div>
-  )
+  );
 }
-

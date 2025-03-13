@@ -1,15 +1,15 @@
-import Link from "next/link"
-import { ArrowRight, ShoppingBag } from "lucide-react"
+import Link from "next/link";
+import { ArrowRight, ShoppingBag } from "lucide-react";
 
-import { Button } from "@/components/ui/button"
-import ProductCard from "@/components/product-card"
-import Newsletter from "@/components/newsletter"
-import FeaturedCollection from "@/components/featured-collection"
+import { Button } from "@/components/ui/button";
+import ProductCard from "@/components/product-card";
+import Newsletter from "@/components/newsletter";
+import FeaturedCollection from "@/components/featured-collection";
 
 export default function Home() {
   return (
     <div className="flex flex-col min-h-screen">
-      <header className="border-b">
+      {/* <header className="border-b">
         <div className="container flex h-16 items-center justify-between">
           <div className="flex items-center gap-6">
             <Link href="/" className="text-xl font-semibold tracking-tight">
@@ -37,7 +37,7 @@ export default function Home() {
             </Link>
           </div>
         </div>
-      </header>
+      </header> */}
       <main className="flex-1">
         <section className="relative h-[80vh] overflow-hidden">
           <div className="absolute inset-0 bg-black/20 z-10" />
@@ -47,9 +47,12 @@ export default function Home() {
             className="absolute inset-0 w-full h-full object-cover"
           />
           <div className="relative z-20 container flex flex-col items-center justify-center h-full text-center text-white">
-            <h1 className="text-4xl md:text-6xl font-light tracking-tight mb-4">Discover Your Signature Scent</h1>
+            <h1 className="text-4xl md:text-6xl font-light tracking-tight mb-4">
+              Discover Your Signature Scent
+            </h1>
             <p className="text-lg md:text-xl max-w-2xl mb-8">
-              Exquisite fragrances crafted with the finest ingredients for the modern connoisseur
+              Exquisite fragrances crafted with the finest ingredients for the
+              modern connoisseur
             </p>
             <Button size="lg" className="bg-white text-black hover:bg-white/90">
               Shop Collection
@@ -60,10 +63,13 @@ export default function Home() {
         <section className="py-20 bg-neutral-50">
           <div className="container">
             <div className="flex flex-col items-center text-center mb-12">
-              <h2 className="text-3xl font-light tracking-tight mb-4">Bestsellers</h2>
+              <h2 className="text-3xl font-light tracking-tight mb-4">
+                Bestsellers
+              </h2>
               <div className="w-20 h-px bg-neutral-300 mb-4" />
               <p className="text-neutral-600 max-w-2xl">
-                Our most coveted fragrances, loved for their distinctive character and lasting impression
+                Our most coveted fragrances, loved for their distinctive
+                character and lasting impression
               </p>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -108,15 +114,21 @@ export default function Home() {
                 />
               </div>
               <div>
-                <h2 className="text-3xl font-light tracking-tight mb-4">Our Story</h2>
+                <h2 className="text-3xl font-light tracking-tight mb-4">
+                  Our Story
+                </h2>
                 <div className="w-20 h-px bg-neutral-300 mb-6" />
                 <p className="text-neutral-600 mb-6">
-                  Founded with a passion for exceptional fragrances, ESSENCE has been crafting distinctive scents since
-                  2010. Our philosophy centers on using only the finest ingredients sourced from around the world.
+                  Founded with a passion for exceptional fragrances, ESSENCE has
+                  been crafting distinctive scents since 2010. Our philosophy
+                  centers on using only the finest ingredients sourced from
+                  around the world.
                 </p>
                 <p className="text-neutral-600 mb-8">
-                  Each fragrance is meticulously developed by our master perfumers, who blend traditional techniques
-                  with innovative approaches to create scents that are both timeless and contemporary.
+                  Each fragrance is meticulously developed by our master
+                  perfumers, who blend traditional techniques with innovative
+                  approaches to create scents that are both timeless and
+                  contemporary.
                 </p>
                 <Button variant="outline">Learn More About Us</Button>
               </div>
@@ -132,7 +144,8 @@ export default function Home() {
             <div>
               <h3 className="text-lg font-medium mb-4">ESSENCE</h3>
               <p className="text-neutral-400 text-sm">
-                Luxury fragrances for the discerning individual. Crafted with passion and precision.
+                Luxury fragrances for the discerning individual. Crafted with
+                passion and precision.
               </p>
             </div>
             <div>
@@ -201,6 +214,5 @@ export default function Home() {
         </div>
       </footer>
     </div>
-  )
+  );
 }
-
