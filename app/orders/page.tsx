@@ -34,16 +34,44 @@ export default function OrdersPage() {
   const [orders, setOrders] = useState<Order[]>(sampleOrders);
   const [statusFilter, setStatusFilter] = useState<string>("all");
   const [cancelOrderId, setCancelOrderId] = useState<string | null>(null);
+  const [token, setToken] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchToken = async () => {
       const token = await getToken();
       console.log(token);
+      setToken(token);
       // Do something with the token
     };
 
     fetchToken();
   }, [getToken]);
+
+  console.log(token, "token");
+
+  // Get orders from api
+  useEffect(() => {
+    if (token) {
+      // Only fetch if token exists
+      fetch("http://localhost:8000/order/orders/", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+        .then((res) => {
+          if (!res.ok) {
+            throw new Error(`HTTP error ${res.status}`);
+          }
+          return res.json();
+        })
+        .then((data) => {
+          setOrders(data);
+        })
+        .catch((error) => {
+          console.error("Error fetching orders:", error);
+        });
+    }
+  }, [token]); // Add token as dependency
 
   // Redirect if not signed in
   if (isLoaded && !isSignedIn) {

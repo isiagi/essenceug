@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import ProductCard from "@/components/product-card";
 import Newsletter from "@/components/newsletter";
 import FeaturedCollection from "@/components/featured-collection";
+import { formatPrice } from "@/lib/utils";
 
 export default function Home() {
   return (
@@ -77,19 +78,19 @@ export default function Home() {
                 image="/images/img2.jpeg"
                 name="Amber Elixir"
                 description="Warm, woody notes with a hint of vanilla"
-                price="$120.00"
+                price={formatPrice(17999)}
               />
               <ProductCard
                 image="/images/img1.jpeg"
                 name="Velvet Rose"
                 description="Delicate floral bouquet with rose and jasmine"
-                price="$95.00"
+                price={formatPrice(19999)}
               />
               <ProductCard
                 image="/images/img4.jpeg"
                 name="Ocean Mist"
                 description="Fresh aquatic scent with citrus undertones"
-                price="$85.00"
+                price={formatPrice(16999)}
               />
             </div>
             <div className="flex justify-center mt-12">

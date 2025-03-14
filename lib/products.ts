@@ -40,13 +40,13 @@ export const products: Product[] = [
   // Noir Collection
   {
     id: "midnight-oud",
-    name: "Midnight Oud",
+    name: "Sauvage",
     description: "Rich, intense fragrance with smoky undertones",
     longDescription:
       "Midnight Oud is a captivating blend of rich, smoky notes that evoke the mystery of the night. This sophisticated fragrance combines rare oud wood with warm spices and subtle hints of rose for a complex, long-lasting scent that makes a powerful statement.",
     additionalDescription:
       "Perfect for evening wear and special occasions, Midnight Oud leaves a memorable impression with its distinctive character and exceptional longevity.",
-    price: 150,
+    price: 18999,
     images: [
       "/images/img1.jpeg",
       "/images/img1.jpeg",
@@ -100,7 +100,7 @@ export const products: Product[] = [
     description: "Luxurious floral with dark, mysterious notes",
     longDescription:
       "Black Orchid is an opulent fragrance that balances rare black orchids with rich fruits, dark chocolate, and spices. This intoxicating blend creates a sensual, sophisticated scent that's both mysterious and alluring.",
-    price: 165,
+    price: 15999,
     images: ["/images/img2.jpeg", "/images/img2.jpeg", "/images/img2.jpeg"],
     category: "Perfume",
     collection: "noir",
@@ -125,7 +125,7 @@ export const products: Product[] = [
     id: "velvet-amber",
     name: "Velvet Amber",
     description: "Warm amber with spicy undertones",
-    price: 145,
+    price: 19999,
     images: ["/images/img4.jpeg"],
     category: "Perfume",
     collection: "noir",
