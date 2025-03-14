@@ -1,40 +1,40 @@
 // Product database
 export type Product = {
-  id: string
-  name: string
-  description: string
-  longDescription?: string
-  additionalDescription?: string
-  price: number
-  originalPrice?: number
-  images: string[]
-  category: string
-  collection: string
-  collectionName: string
-  tags?: string[]
-  sku?: string
-  features?: string[]
+  id: string;
+  name: string;
+  description: string;
+  longDescription?: string;
+  additionalDescription?: string;
+  price: number;
+  originalPrice?: number;
+  images: string[];
+  category: string;
+  collection: string;
+  collectionName: string;
+  tags?: string[];
+  sku?: string;
+  features?: string[];
   sizes?: {
-    value: string
-    label: string
-    price?: number
-    isDefault?: boolean
-  }[]
-  fragranceFamily?: string
-  topNotes?: string
-  heartNotes?: string
-  baseNotes?: string
-  longevity?: string
-  sillage?: string
-  volume?: string
-  ingredients?: string
+    value: string;
+    label: string;
+    price?: number;
+    isDefault?: boolean;
+  }[];
+  fragranceFamily?: string;
+  topNotes?: string;
+  heartNotes?: string;
+  baseNotes?: string;
+  longevity?: string;
+  sillage?: string;
+  volume?: string;
+  ingredients?: string;
   reviews?: {
-    name: string
-    date: string
-    rating: number
-    comment: string
-  }[]
-}
+    name: string;
+    date: string;
+    rating: number;
+    comment: string;
+  }[];
+};
 
 export const products: Product[] = [
   // Noir Collection
@@ -48,10 +48,10 @@ export const products: Product[] = [
       "Perfect for evening wear and special occasions, Midnight Oud leaves a memorable impression with its distinctive character and exceptional longevity.",
     price: 150,
     images: [
-      "/placeholder.svg?height=600&width=600",
-      "/placeholder.svg?height=600&width=600",
-      "/placeholder.svg?height=600&width=600",
-      "/placeholder.svg?height=600&width=600",
+      "/images/img1.jpeg",
+      "/images/img1.jpeg",
+      "/images/img1.jpeg",
+      "/images/img1.jpeg",
     ],
     category: "Perfume",
     collection: "noir",
@@ -101,11 +101,7 @@ export const products: Product[] = [
     longDescription:
       "Black Orchid is an opulent fragrance that balances rare black orchids with rich fruits, dark chocolate, and spices. This intoxicating blend creates a sensual, sophisticated scent that's both mysterious and alluring.",
     price: 165,
-    images: [
-      "/placeholder.svg?height=600&width=600",
-      "/placeholder.svg?height=600&width=600",
-      "/placeholder.svg?height=600&width=600",
-    ],
+    images: ["/images/img2.jpeg", "/images/img2.jpeg", "/images/img2.jpeg"],
     category: "Perfume",
     collection: "noir",
     collectionName: "The Noir Collection",
@@ -130,7 +126,7 @@ export const products: Product[] = [
     name: "Velvet Amber",
     description: "Warm amber with spicy undertones",
     price: 145,
-    images: ["/placeholder.svg?height=600&width=600"],
+    images: ["/images/img4.jpeg"],
     category: "Perfume",
     collection: "noir",
     collectionName: "The Noir Collection",
@@ -149,7 +145,7 @@ export const products: Product[] = [
     name: "Dark Vanilla",
     description: "Rich vanilla with smoky, woody notes",
     price: 135,
-    images: ["/placeholder.svg?height=600&width=600"],
+    images: ["/images/img2.jpeg"],
     category: "Perfume",
     collection: "noir",
     collectionName: "The Noir Collection",
@@ -170,7 +166,7 @@ export const products: Product[] = [
     name: "Lavender Fields",
     description: "Calming lavender with fresh herbal undertones",
     price: 80,
-    images: ["/placeholder.svg?height=600&width=600"],
+    images: ["/images/img5.jpeg"],
     category: "Perfume",
     collection: "botanical",
     collectionName: "The Botanical Collection",
@@ -189,7 +185,7 @@ export const products: Product[] = [
     name: "Rose Garden",
     description: "Delicate rose with dewy green notes",
     price: 95,
-    images: ["/placeholder.svg?height=600&width=600"],
+    images: ["/images/img4.jpeg"],
     category: "Perfume",
     collection: "botanical",
     collectionName: "The Botanical Collection",
@@ -277,8 +273,8 @@ export const products: Product[] = [
     topNotes: "Bergamot, Mandarin, Sea Notes",
     heartNotes: "Rosemary, Lavender, Jasmine",
     baseNotes: "Cedarwood,  Mandarin, Sea Notes",
-    heartNotes: "Rosemary, Lavender, Jasmine",
-    baseNotes: "Cedarwood, Musk, Amber",
+    // heartNotes: "Rosemary, Lavender, Jasmine",
+    // baseNotes: "Cedarwood, Musk, Amber",
     longevity: "5-7 hours",
     sillage: "Moderate",
     volume: "50ml",
@@ -441,46 +437,51 @@ export const products: Product[] = [
     sillage: "Moderate",
     volume: "50ml",
   },
-]
+];
 
 // Function to get related products
-export function getRelatedProducts(currentProductId: string, collection: string, limit = 4): Product[] {
+export function getRelatedProducts(
+  currentProductId: string,
+  collection: string,
+  limit = 4
+): Product[] {
   // First get products from the same collection
-  const sameCollectionProducts = products.filter((p) => p.collection === collection && p.id !== currentProductId)
+  const sameCollectionProducts = products.filter(
+    (p) => p.collection === collection && p.id !== currentProductId
+  );
 
   // If we have enough products from the same collection, return those
   if (sameCollectionProducts.length >= limit) {
-    return sameCollectionProducts.slice(0, limit)
+    return sameCollectionProducts.slice(0, limit);
   }
 
   // Otherwise, add products from other collections to reach the limit
   const otherProducts = products
     .filter((p) => p.collection !== collection && p.id !== currentProductId)
-    .slice(0, limit - sameCollectionProducts.length)
+    .slice(0, limit - sameCollectionProducts.length);
 
-  return [...sameCollectionProducts, ...otherProducts]
+  return [...sameCollectionProducts, ...otherProducts];
 }
 
 // Function to get products by collection
 export function getProductsByCollection(collection: string): Product[] {
-  return products.filter((p) => p.collection === collection)
+  return products.filter((p) => p.collection === collection);
 }
 
 // Function to get a product by ID
 export function getProductById(id: string): Product | undefined {
-  return products.find((p) => p.id === id)
+  return products.find((p) => p.id === id);
 }
 
 // Function to search products
 export function searchProducts(query: string): Product[] {
-  const lowercaseQuery = query.toLowerCase()
+  const lowercaseQuery = query.toLowerCase();
   return products.filter(
     (p) =>
       p.name.toLowerCase().includes(lowercaseQuery) ||
       p.description.toLowerCase().includes(lowercaseQuery) ||
       p.tags?.some((tag) => tag.toLowerCase().includes(lowercaseQuery)) ||
       p.category.toLowerCase().includes(lowercaseQuery) ||
-      p.collectionName.toLowerCase().includes(lowercaseQuery),
-  )
+      p.collectionName.toLowerCase().includes(lowercaseQuery)
+  );
 }
-

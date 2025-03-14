@@ -42,7 +42,7 @@ export default function Home() {
         <section className="relative h-[80vh] overflow-hidden">
           <div className="absolute inset-0 bg-black/20 z-10" />
           <img
-            src="/placeholder.svg?height=1080&width=1920"
+            src="/images/img3.jpeg"
             alt="Elegant perfume bottles on display"
             className="absolute inset-0 w-full h-full object-cover"
           />
@@ -74,19 +74,19 @@ export default function Home() {
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               <ProductCard
-                image="/placeholder.svg?height=600&width=400"
+                image="/images/img2.jpeg"
                 name="Amber Elixir"
                 description="Warm, woody notes with a hint of vanilla"
                 price="$120.00"
               />
               <ProductCard
-                image="/placeholder.svg?height=600&width=400"
+                image="/images/img1.jpeg"
                 name="Velvet Rose"
                 description="Delicate floral bouquet with rose and jasmine"
                 price="$95.00"
               />
               <ProductCard
-                image="/placeholder.svg?height=600&width=400"
+                image="/images/img4.jpeg"
                 name="Ocean Mist"
                 description="Fresh aquatic scent with citrus undertones"
                 price="$85.00"

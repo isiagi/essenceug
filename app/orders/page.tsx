@@ -1,16 +1,22 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { useUser } from "@clerk/nextjs"
-import { redirect } from "next/navigation"
-import Link from "next/link"
-import { Package, Search, Filter } from "lucide-react"
+import { useEffect, useState } from "react";
+import { useAuth, useUser } from "@clerk/nextjs";
+import { redirect } from "next/navigation";
+import Link from "next/link";
+import { Package, Search, Filter } from "lucide-react";
 
-import { Button } from "@/components/ui/button"
-import { OrderCard } from "@/components/order-card"
-import { sampleOrders } from "@/lib/sample-orders"
-import type { Order, OrderStatus } from "@/types/order"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { Button } from "@/components/ui/button";
+import { OrderCard } from "@/components/order-card";
+import { sampleOrders } from "@/lib/sample-orders";
+import type { Order, OrderStatus } from "@/types/order";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -20,39 +26,57 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-} from "@/components/ui/alert-dialog"
+} from "@/components/ui/alert-dialog";
 
 export default function OrdersPage() {
-  const { isLoaded, isSignedIn } = useUser()
-  const [orders, setOrders] = useState<Order[]>(sampleOrders)
-  const [statusFilter, setStatusFilter] = useState<string>("all")
-  const [cancelOrderId, setCancelOrderId] = useState<string | null>(null)
+  const { isLoaded, isSignedIn } = useUser();
+  const { getToken } = useAuth();
+  const [orders, setOrders] = useState<Order[]>(sampleOrders);
+  const [statusFilter, setStatusFilter] = useState<string>("all");
+  const [cancelOrderId, setCancelOrderId] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchToken = async () => {
+      const token = await getToken();
+      console.log(token);
+      // Do something with the token
+    };
+
+    fetchToken();
+  }, [getToken]);
 
   // Redirect if not signed in
   if (isLoaded && !isSignedIn) {
-    redirect("/sign-in")
+    redirect("/sign-in");
   }
 
   if (!isLoaded) {
-    return <div className="container py-12">Loading...</div>
+    return <div className="container py-12">Loading...</div>;
   }
 
-  const filteredOrders = statusFilter === "all" ? orders : orders.filter((order) => order.status === statusFilter)
+  const filteredOrders =
+    statusFilter === "all"
+      ? orders
+      : orders.filter((order) => order.status === statusFilter);
 
   const handleCancelOrder = (orderId: string) => {
-    setCancelOrderId(orderId)
-  }
+    setCancelOrderId(orderId);
+  };
+
+  console.log(getToken());
 
   const confirmCancelOrder = () => {
     if (cancelOrderId) {
       setOrders(
         orders.map((order) =>
-          order.id === cancelOrderId ? { ...order, status: "cancelled" as OrderStatus, canCancel: false } : order,
-        ),
-      )
-      setCancelOrderId(null)
+          order.id === cancelOrderId
+            ? { ...order, status: "cancelled" as OrderStatus, canCancel: false }
+            : order
+        )
+      );
+      setCancelOrderId(null);
     }
-  }
+  };
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -88,10 +112,18 @@ export default function OrdersPage() {
 
               <div className="space-y-4">
                 {filteredOrders.length > 0 ? (
-                  filteredOrders.map((order) => <OrderCard key={order.id} order={order} onCancel={handleCancelOrder} />)
+                  filteredOrders.map((order) => (
+                    <OrderCard
+                      key={order.id}
+                      order={order}
+                      onCancel={handleCancelOrder}
+                    />
+                  ))
                 ) : (
                   <div className="text-center py-8 border rounded-lg">
-                    <p className="text-neutral-600">No orders match the selected filter.</p>
+                    <p className="text-neutral-600">
+                      No orders match the selected filter.
+                    </p>
                   </div>
                 )}
               </div>
@@ -103,7 +135,8 @@ export default function OrdersPage() {
               </div>
               <h2 className="text-xl font-medium mb-2">No Orders Yet</h2>
               <p className="text-neutral-600 mb-6 max-w-md mx-auto">
-                You haven't placed any orders yet. Start shopping to find your perfect fragrance.
+                You haven't placed any orders yet. Start shopping to find your
+                perfect fragrance.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button asChild>
@@ -121,23 +154,29 @@ export default function OrdersPage() {
         </div>
       </main>
 
-      <AlertDialog open={!!cancelOrderId} onOpenChange={(open) => !open && setCancelOrderId(null)}>
+      <AlertDialog
+        open={!!cancelOrderId}
+        onOpenChange={(open) => !open && setCancelOrderId(null)}
+      >
         <AlertDialogContent>
           <AlertDialogHeader>
             <AlertDialogTitle>Cancel Order</AlertDialogTitle>
             <AlertDialogDescription>
-              Are you sure you want to cancel this order? This action cannot be undone.
+              Are you sure you want to cancel this order? This action cannot be
+              undone.
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
             <AlertDialogCancel>No, keep order</AlertDialogCancel>
-            <AlertDialogAction onClick={confirmCancelOrder} className="bg-red-600 text-white hover:bg-red-700">
+            <AlertDialogAction
+              onClick={confirmCancelOrder}
+              className="bg-red-600 text-white hover:bg-red-700"
+            >
               Yes, cancel order
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>
     </div>
-  )
+  );
 }
-
